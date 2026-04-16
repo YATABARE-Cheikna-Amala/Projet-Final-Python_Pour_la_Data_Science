@@ -1,5 +1,8 @@
-## Utilisation des données via l'API de Huugins Face
--------
+## Utilisation des données via l'API de Hugging Face
+
+---
+
+```python
 import requests
 import pandas as pd
 
@@ -26,4 +29,3 @@ for offset in range(0, 1000, 100):  # adapte si dataset plus grand
 df = pd.DataFrame(all_rows)
 
 df.head()
---------
