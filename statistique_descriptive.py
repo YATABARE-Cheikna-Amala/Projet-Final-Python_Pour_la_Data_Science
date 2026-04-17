@@ -132,3 +132,15 @@ def bivarié_cat_cat(data, var1, var2):
     plt.show()
     
     print(table)
+
+def fonction_scoring(df, col, target):
+    tab = pd.crosstab(df[col], df[target])
+    tab.columns = ['non_def', 'def']
+    
+    tab['dist_non_def'] = tab['non_def'] / tab['non_def'].sum()
+    tab['dist_def'] = tab['def'] / tab['def'].sum()
+    
+    tab['WoE'] = np.log(tab['dist_non_def'] / tab['dist_def'])
+    tab['IV'] = (tab['dist_non_def'] - tab['dist_def']) * tab['WoE']
+    
+    return tab, tab['IV'].sum()
