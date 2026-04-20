@@ -68,6 +68,7 @@ De même, l’*âge* et la *durée d’historique de crédit* sont fortement cor
 ![Texte alternatif](images/home_ownership_plot.png)
 
 ## Impact du statut de logement sur le risque de défaut
+
 les emprunteurs ayant une situation de logement plus stable ou plus sécurisée ont tendance à moins faire défaut.
 
 Le fait de posséder entièrement son logement (*OWN*) est associé au risque le plus faible, ce qui reflète probablement une meilleure stabilité financière et moins de charges récurrentes.
@@ -81,6 +82,10 @@ Globalement, cette variable enrichit l’analyse en permettant de mieux distingu
 
 ---
 
+![Texte alternatif](images/ima2.png)
+## défaut de paiement en fonction des motifs de souscription des prêts
 
-
-
+Les prêts de type Debt Consolidation et Medical présentent les taux de défaut les plus élevés.
+À l’inverse, les prêts pour Education et Venture affichent des taux de défaut relativement plus faibles.
+Les différences entre catégories sont modérées mais restent statistiquement exploitables pour la prédiction.
+Ainsi, le Loan Purpose a un pouvoir discriminant réel sur le risque de défaut.
