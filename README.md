@@ -39,6 +39,7 @@ La différence marquée entre les deux groupes indique que le comportement finan
 Contrairement à de nombreuses variables financières qui nécessitent des transformations ou des regroupements, cette variable fournit une séparation claire et directe entre les niveaux de risque.
 
 Cela suggère que le comportement historique capture des facteurs de risque qui ne sont pas entièrement observables à travers le revenu ou les caractéristiques du prêt uniquement.
+
 ---
 ![Texte alternatif](images/correlation_heatmap.png)
 
@@ -76,6 +77,7 @@ Les emprunteurs ayant un prêt immobilier (*MORTGAGE*) se situent dans une posit
 
 Le statut de logement apporte une information pertinente sur le risque de défaut.
 Globalement, cette variable enrichit l’analyse en permettant de mieux distinguer les profils d’emprunteurs stables et moins stables.
+
 ---
 
 
