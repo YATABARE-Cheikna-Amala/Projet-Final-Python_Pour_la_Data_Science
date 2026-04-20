@@ -67,6 +67,7 @@ De même, l’*âge* et la *durée d’historique de crédit* sont fortement cor
 ---
 ![Texte alternatif](images/home_ownership_plot.png)
 
+## Impact du statut de logement sur le risque de défaut
 les emprunteurs ayant une situation de logement plus stable ou plus sécurisée ont tendance à moins faire défaut.
 
 Le fait de posséder entièrement son logement (*OWN*) est associé au risque le plus faible, ce qui reflète probablement une meilleure stabilité financière et moins de charges récurrentes.
