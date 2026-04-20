@@ -73,7 +73,6 @@ def detection_outliers(data, var):
 
 def analyse_categorielle(data, var):
     
-    
     counts = data[var].value_counts(dropna=False)
         
     plt.figure()
@@ -144,3 +143,4 @@ def fonction_scoring(df, col, target):
     tab['IV'] = (tab['dist_non_def'] - tab['dist_def']) * tab['WoE']
     
     return tab, tab['IV'].sum()
+
