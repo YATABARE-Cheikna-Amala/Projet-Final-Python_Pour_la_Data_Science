@@ -1,6 +1,5 @@
 Explication
-----
-![Texte alternatif](images/correlation_heatmap.png)
+
 
 ---
 
