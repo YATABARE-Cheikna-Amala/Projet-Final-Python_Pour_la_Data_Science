@@ -52,7 +52,6 @@ De manière similaire, le ratio *Loan / Income* est également positivement corr
 
 Le *taux d’intérêt* suit la même logique avec une corrélation positive de 0,34, suggérant que les prêts plus coûteux sont associés à des emprunteurs plus risqués.
 
-À l’inverse, les variables liées au revenu montrent une relation négative avec le défaut. Le log du revenu présente une corrélation de −0,27, tandis que le revenu annuel brut est également négativement corrélé (−0,16). Cela indique que les emprunteurs ayant des revenus plus élevés ont globalement moins de risque de défaut.
 
 ---
 
@@ -63,7 +62,5 @@ L’analyse met également en évidence des problèmes de multicolinéarité ent
 On observe une corrélation très forte entre le *taux d’intérêt* et le *Loan Grade* (0,94), ce qui suggère que ces deux variables capturent quasiment la même information de risque.
 
 De même, l’*âge* et la *durée d’historique de crédit* sont fortement corrélés (0,88), indiquant une redondance dans la mesure de l’expérience financière des emprunteurs.
-
-Enfin, le revenu annuel et son logarithme sont également fortement corrélés (0,80), ce qui est attendu puisque le log est une transformation directe de la variable originale.
 
 ---
