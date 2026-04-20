@@ -1,4 +1,4 @@
-Explication
+
 
 
 ---
@@ -40,7 +40,7 @@ Contrairement à de nombreuses variables financières qui nécessitent des trans
 
 Cela suggère que le comportement historique capture des facteurs de risque qui ne sont pas entièrement observables à travers le revenu ou les caractéristiques du prêt uniquement.
 ---
-![Texte alternatif](images/correlation_heatmap.png)*
+![Texte alternatif](images/correlation_heatmap.png)
 
 ## Corrélations clés avec le statut de défaut
 
@@ -64,3 +64,20 @@ On observe une corrélation très forte entre le *taux d’intérêt* et le *Loa
 De même, l’*âge* et la *durée d’historique de crédit* sont fortement corrélés (0,88), indiquant une redondance dans la mesure de l’expérience financière des emprunteurs.
 
 ---
+![Texte alternatif](images/home_ownership_plot.png)
+
+les emprunteurs ayant une situation de logement plus stable ou plus sécurisée ont tendance à moins faire défaut.
+
+Le fait de posséder entièrement son logement (*OWN*) est associé au risque le plus faible, ce qui reflète probablement une meilleure stabilité financière et moins de charges récurrentes.
+
+Les emprunteurs ayant un prêt immobilier (*MORTGAGE*) se situent dans une position intermédiaire : ils ont une dette, mais présentent néanmoins un risque plus faible que les locataires.
+
+À l’inverse, le statut *RENT* apparaît comme le groupe le plus risqué. Cela peut s’expliquer par une moindre capacité d’épargne ou une stabilité financière plus faible.
+
+Le statut de logement apporte une information pertinente sur le risque de défaut.
+Globalement, cette variable enrichit l’analyse en permettant de mieux distinguer les profils d’emprunteurs stables et moins stables.
+---
+
+
+
+
