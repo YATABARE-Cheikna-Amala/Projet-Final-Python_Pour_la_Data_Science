@@ -83,6 +83,7 @@ Globalement, cette variable enrichit l’analyse en permettant de mieux distingu
 ---
 
 ![Texte alternatif](images/ima2.png)
+
 ## défaut de paiement en fonction des motifs de souscription des prêts
 
 Les prêts de type Debt Consolidation et Medical présentent les taux de défaut les plus élevés.
