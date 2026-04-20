@@ -7,32 +7,61 @@ import pandas as pd
 def Statistique_Descriptives(
     data, 
     var_num, 
+    bins=30,
     color_hist="skyblue", 
     color_mean="red", 
-    color_median="green"
+    color_median="green",
+    show_kde=False
 ):
+    # Vérification
+    if var_num not in data.columns:
+        raise ValueError(f"La variable '{var_num}' n'existe pas dans le dataset.")
+    
     values = data[var_num].dropna()
     
-    plt.figure()
+    if values.empty:
+        raise ValueError(f"La variable '{var_num}' ne contient pas de valeurs exploitables.")
     
-    # Histogramme
-    plt.hist(values, bins=50, color=color_hist, edgecolor="black")
-    
-    # Stats
+    # Statistiques
     mean = values.mean()
     median = values.median()
+    std = values.std()
+    skew = values.skew()
     
-    plt.axvline(mean, color=color_mean, linestyle="dashed", linewidth=2, label=f"Moyenne: {mean:.2f}")
-    plt.axvline(median, color=color_median, linestyle="dashed", linewidth=2, label=f"Médiane: {median:.2f}")
+    # Figure
+    plt.figure(figsize=(10, 6))
     
-    plt.title(f"Distribution de {var_num}")
+    # Histogramme
+    plt.hist(values, bins=bins, color=color_hist, edgecolor="black", alpha=0.7)
+    
+    # Lignes statistiques
+    plt.axvline(mean, color=color_mean, linestyle="--", linewidth=2, label=f"Moyenne: {mean:.2f}")
+    plt.axvline(median, color=color_median, linestyle="--", linewidth=2, label=f"Médiane: {median:.2f}")
+    
+    # Titre + labels
+    plt.title(f"Distribution de {var_num}", fontsize=14, fontweight="bold")
     plt.xlabel(var_num)
     plt.ylabel("Fréquence")
     
+    # Ajout d'un résumé statistique dans le graphe
+    stats_text = (
+        f"N = {len(values)}\n"
+        f"Std = {std:.2f}\n"
+        f"Skew = {skew:.2f}"
+    )
+    
+    plt.text(
+        0.95, 0.95, stats_text,
+        transform=plt.gca().transAxes,
+        fontsize=10,
+        verticalalignment='top',
+        horizontalalignment='right',
+        bbox=dict(boxstyle="round", facecolor="white", alpha=0.8)
+    )
+    
     plt.legend()
+    plt.tight_layout()
     plt.show()
-
-
 
 def detection_outliers(data, var):
     
@@ -71,25 +100,55 @@ def detection_outliers(data, var):
 
 
 
-def analyse_categorielle(data, var):
-    
-    counts = data[var].value_counts(dropna=False)
-        
-    plt.figure()
-    counts.plot(kind="bar", color="skyblue", edgecolor="black")
-        
-    plt.title(f"Distribution de {var}")
+
+
+def analyse_categorielle(data, var, normalize=False, top_n=None, figsize=(8,5)):
+    """
+    Analyse une variable catégorielle avec visualisation et statistiques.
+
+    Paramètres :
+    - data : DataFrame pandas
+    - var : variable catégorielle (str)
+    - normalize : bool (affiche les proportions si True)
+    - top_n : int (affiche uniquement les top modalités)
+    - figsize : tuple (taille du graphique)
+    """
+
+    # Vérification
+    if var not in data.columns:
+        print(f"⚠️ La variable '{var}' n'existe pas dans le dataset.")
+        return
+
+    # Comptage
+    counts = data[var].value_counts(dropna=False, normalize=normalize)
+
+    # Top N si demandé
+    if top_n is not None:
+        counts = counts.head(top_n)
+
+    # Graphique
+    plt.figure(figsize=figsize)
+    sns.barplot(x=counts.index, y=counts.values)
+
+    plt.title(f"Distribution de {var}", fontsize=14, fontweight="bold")
     plt.xlabel(var)
-    plt.ylabel("Nombre d'observations")
+    plt.ylabel("Proportion" if normalize else "Nombre d'observations")
     plt.xticks(rotation=45)
-        
+    
+    # Ajouter les valeurs sur les barres
+    for i, v in enumerate(counts.values):
+        plt.text(i, v, f"{v:.2f}" if normalize else int(v), 
+                 ha='center', va='bottom')
+
+    plt.tight_layout()
     plt.show()
-        
-    print(f"--- {var} ---")
+
+    # Affichage texte
+    print(f"\n--- Analyse de {var} ---")
     print(counts)
-    print("\n")
 
-
+    # Info supplémentaire
+    print(f"\nNombre de modalités : {data[var].nunique(dropna=False)}")
 def bivarié_num_num(data, var1, var2):
     
     plt.figure()
@@ -120,27 +179,116 @@ def bivarié_cat_num(data, cat_var, num_var):
 
 
 
-def bivarié_cat_cat(data, var1, var2):
+
+def bivariate_cat_cat(data, var, target, normalize='index', figsize=(10,5)):
+    """
+    Analyse bivariée entre une variable catégorielle et une cible binaire.
+
+    Paramètres :
+    - data : DataFrame
+    - var : variable catégorielle
+    - target : variable cible (0/1)
+    - normalize : 'index' pour taux, None pour effectifs
+    """
+
+    # Table croisée
+    table = pd.crosstab(data[var], data[target])
     
-    table = pd.crosstab(data[var1], data[var2])
-    
-    plt.figure(figsize=(6,4))
+    # Taux de défaut
+    rate = pd.crosstab(data[var], data[target], normalize='index')
+
+    # 🔹 Graphique 1 : Heatmap des effectifs
+    plt.figure(figsize=figsize)
     sns.heatmap(table, annot=True, fmt="d", cmap="Blues")
-    
-    plt.title(f"{var1} vs {var2}")
+    plt.title(f"Effectifs : {var} vs {target}")
     plt.show()
+
+    # 🔹 Graphique 2 : Taux de défaut (LE PLUS IMPORTANT)
+    plt.figure(figsize=figsize)
+    rate[1].sort_values(ascending=False).plot(kind='bar')
     
+    plt.title(f"Taux de défaut selon {var}", fontweight="bold")
+    plt.ylabel("Taux de défaut")
+    plt.xlabel(var)
+    plt.xticks(rotation=45)
+
+    # Ajouter les valeurs
+    for i, v in enumerate(rate[1].sort_values(ascending=False)):
+        plt.text(i, v, f"{v:.2f}", ha='center', va='bottom')
+
+    plt.tight_layout()
+    plt.show()
+
+    # Affichage console
+    print("\n--- Table des effectifs ---")
     print(table)
+    
+    print("\n--- Taux de défaut ---")
+    print(rate)
 
-def fonction_scoring(df, col, target):
-    tab = pd.crosstab(df[col], df[target])
-    tab.columns = ['non_def', 'def']
-    
-    tab['dist_non_def'] = tab['non_def'] / tab['non_def'].sum()
-    tab['dist_def'] = tab['def'] / tab['def'].sum()
-    
-    tab['WoE'] = np.log(tab['dist_non_def'] / tab['dist_def'])
-    tab['IV'] = (tab['dist_non_def'] - tab['dist_def']) * tab['WoE']
-    
-    return tab, tab['IV'].sum()
+def default_summary(df, group_col):
+    return df.groupby(group_col).agg(
+        # Total number of borrowers in each group (sample size — critical for reliability)
+        total=('Default Status', 'count'),
 
+        # Number of borrowers who defaulted (sum of 1s in the binary target)
+        defaults=('Default Status', 'sum'),
+
+        # Default rate = mean of the binary target = proportion of defaults in the group
+        default_rate=('Default Status', 'mean'),
+
+        # Lower bound of the 95% confidence interval for the default rate.
+        # Uses a normal-approximation (Wald) interval via statsmodels' proportion_confint.
+        # Wider intervals signal less reliable estimates (typically small groups).
+        ci_lower=('Default Status', lambda x: proportion_confint(x.sum(), len(x), alpha=0.05)[0]),
+
+        # Upper bound of the 95% confidence interval for the default rate.
+        ci_upper=('Default Status', lambda x: proportion_confint(x.sum(), len(x), alpha=0.05)[1])
+    ).reset_index()  # Flatten the groupby index back into a regular column for easy display
+
+
+
+from scipy.stats import chi2_contingency
+
+def chi2_test(data, target, cat_vars):
+    
+    results = []
+
+    for var in cat_vars:
+        table = pd.crosstab(data[var], data[target])
+        chi2, p, dof, _ = chi2_contingency(table)
+
+        results.append([var, chi2, p])
+
+    res_df = pd.DataFrame(results, columns=["Variable", "Chi2", "p-value"])
+    res_df = res_df.sort_values("p-value")
+
+    return res_df
+
+from scipy.stats import ttest_ind
+
+def t_test(data, target, num_vars):
+
+    results = []
+
+    for var in num_vars:
+        g0 = data[data[target] == 0][var]
+        g1 = data[data[target] == 1][var]
+
+        stat, p = ttest_ind(g0, g1, nan_policy='omit')
+
+        results.append([var, stat, p])
+
+    res_df = pd.DataFrame(results, columns=["Variable", "t-stat", "p-value"])
+    res_df = res_df.sort_values("p-value")
+
+    return res_df
+
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import pandas as pd
+
+def compute_vif(X):
+    vif = pd.DataFrame()
+    vif["variable"] = X.columns
+    vif["VIF"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+    return vif.sort_values("VIF", ascending=False)
