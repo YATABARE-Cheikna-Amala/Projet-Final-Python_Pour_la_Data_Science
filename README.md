@@ -17,6 +17,12 @@ Le défaut antérieur se combine fortement avec le niveau d’endettement — un
 ### 3. Revenu
 Le défaut antérieur est indépendant du revenu — même les emprunteurs à revenu élevé ayant déjà fait défaut présentent un taux de défaut de **23 %**, soit près de **4 fois plus élevé** que leurs homologues sans défaut antérieur (6 %).
 
+## Implication
+
+Le défaut antérieur agit comme un signal comportemental indépendant par rapport au revenu et au ratio LTI, mais il est en grande partie déjà intégré dans la variable *grade de crédit*.
+
+Sa contribution marginale dans un modèle incluant le grade doit donc être validée : sa valeur ajoutée pourrait être limitée aux segments qui ne sont pas suffisamment discriminés par le grade seul.
+
 ---
 
 ## Implication
@@ -34,4 +40,31 @@ La différence marquée entre les deux groupes indique que le comportement finan
 Contrairement à de nombreuses variables financières qui nécessitent des transformations ou des regroupements, cette variable fournit une séparation claire et directe entre les niveaux de risque.
 
 Cela suggère que le comportement historique capture des facteurs de risque qui ne sont pas entièrement observables à travers le revenu ou les caractéristiques du prêt uniquement.
+---
+![Texte alternatif](images/correlation_heatmap.png)*
+
+## Corrélations clés avec le statut de défaut
+
+Les résultats montrent plusieurs relations importantes entre les variables explicatives et le défaut de paiement.
+
+Tout d’abord, le *Loan Grade* (codé numériquement) présente une corrélation positive relativement élevée avec le défaut (0,38), ce qui signifie que les grades plus risqués sont associés à une probabilité plus forte de défaut.
+
+De manière similaire, le ratio *Loan / Income* est également positivement corrélé au défaut (0,38), indiquant que les emprunteurs qui consacrent une plus grande part de leur revenu au remboursement ont un risque plus élevé.
+
+Le *taux d’intérêt* suit la même logique avec une corrélation positive de 0,34, suggérant que les prêts plus coûteux sont associés à des emprunteurs plus risqués.
+
+À l’inverse, les variables liées au revenu montrent une relation négative avec le défaut. Le log du revenu présente une corrélation de −0,27, tandis que le revenu annuel brut est également négativement corrélé (−0,16). Cela indique que les emprunteurs ayant des revenus plus élevés ont globalement moins de risque de défaut.
+
+---
+
+## Redondance et multicolinéarité
+
+L’analyse met également en évidence des problèmes de multicolinéarité entre certaines variables.
+
+On observe une corrélation très forte entre le *taux d’intérêt* et le *Loan Grade* (0,94), ce qui suggère que ces deux variables capturent quasiment la même information de risque.
+
+De même, l’*âge* et la *durée d’historique de crédit* sont fortement corrélés (0,88), indiquant une redondance dans la mesure de l’expérience financière des emprunteurs.
+
+Enfin, le revenu annuel et son logarithme sont également fortement corrélés (0,80), ce qui est attendu puisque le log est une transformation directe de la variable originale.
+
 ---
