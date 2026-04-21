@@ -300,4 +300,8 @@ git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_
 
 # Accéder au dossier du projet
 cd Projet-Final-Python_Pour_la_Data_Science
+
+# Executer le notebook
+Projet_python_pour_la_data_science.ipynb
+
 ---
