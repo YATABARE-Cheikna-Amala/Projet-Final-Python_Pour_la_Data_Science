@@ -58,7 +58,7 @@ C'est un Dataset public d'une plateforme reconnue, régulièrement entretenu par
 | **Previous Default** | Binaire | Défaut antérieur | Yes, No |
 
 ### Légendes
-- **Moyenne du Revenu:** $63,000
+- **Moyenne du Revenu:** 63,000 euro
 - **Taux de Défaut Global:** 21.5% (défaut) vs 78.5% (remboursement)
 - **LTI Moyen:** 28% (bon indicateur : < 43%)
 
