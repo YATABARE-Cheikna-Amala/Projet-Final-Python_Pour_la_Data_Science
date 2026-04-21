@@ -163,7 +163,7 @@ Les données ont été divisées en deux ensembles :
 
 ---
 # Résultat
-![Texte alternatif](images/confusion.png)
+![Texte alternatif](images/Confusion.png)
 
 ---
 ### 📈 Performances globales
