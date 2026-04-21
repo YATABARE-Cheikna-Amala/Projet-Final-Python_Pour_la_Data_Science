@@ -190,7 +190,7 @@ Les données ont été divisées en deux ensembles :
 git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_Data_Science
 
 # Aller dans le dossier
-cd Projet-Final-Python_Pour_la_Data_Science
+cd `Projet-Final-Python_Pour_la_Data_Science`
 
 # Lancer le notebook
 jupyter notebook (Run All)
