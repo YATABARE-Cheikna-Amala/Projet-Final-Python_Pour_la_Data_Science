@@ -19,12 +19,12 @@ C'est un Dataset public d'une plateforme reconnue, régulièrement entretenu par
 
 ### Deux approches posssibles
 
-**Méthode 1 : **API REST (Hugging Face Datasets Server)**  
-  
-**Méthode 2 : **Bibliothèque Hugging Face (`datasets`)**  
+- **Méthode 1 : API REST (Hugging Face Datasets Server)**  
+  Implémentée dans le notebook, mais non utilisée pour le chargement final des données.
+**Méthode 2** : **Bibliothèque Hugging Face (`datasets`)**  
   Permet un chargement direct des données (simple et rapide).
 
-**Approche sélectionnée:** Méthode 2 (chargement direct via `load_dataset`)
+**Approche sélectionnée:** Méthode 2 (chargement direct via `load_dataset` de `datasets`)
 
 ---
 
