@@ -1,5 +1,9 @@
+#  Credit Risk Analysis & Loan Default Prediction
 
-
+---
+##  Objectif du projet
+L’objectif de cette étude est d’identifier et d’analyser les facteurs associés à une probabilité élevée de défaut de paiement d’un prêt.  
+Ce projet vise à construire un modèle prédictif afin d’aider à la prise de décision en matière d’octroi de crédit.
 
 ---
 
@@ -90,3 +94,15 @@ Les prêts de type Debt Consolidation et Medical présentent les taux de défaut
 À l’inverse, les prêts pour Education et Venture affichent des taux de défaut relativement plus faibles.
 Les différences entre catégories sont modérées mais restent statistiquement exploitables pour la prédiction.
 Ainsi, le Loan Purpose a un pouvoir discriminant réel sur le risque de défaut.
+
+---
+# Cloner le repo
+git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_Data_Science
+
+# Aller dans le dossier
+cd Projet-Final-Python_Pour_la_Data_Science
+
+# Lancer le notebook
+jupyter notebook (Run All)
+
+---
