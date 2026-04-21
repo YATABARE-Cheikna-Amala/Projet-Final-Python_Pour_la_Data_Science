@@ -291,15 +291,13 @@ Les données ont été divisées en deux ensembles :
 - L’accuracy (77%) est à interpréter avec prudence en raison du **déséquilibre des classes**
 
 ---
-# initialiser un repo
-git init
-# Cloner le repo
-git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_Data_Science
 
-# Aller dans le dossier
-cd `Projet-Final-Python_Pour_la_Data_Science`
+##  Utilisation du projet
 
-# Lancer le notebook
-`Projet_python_pour_la_data_science.ipynb (Run All)`
+```bash
+# Cloner le repository
+git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_Data_Science.git
 
+# Accéder au dossier du projet
+cd Projet-Final-Python_Pour_la_Data_Science
 ---
