@@ -111,7 +111,7 @@ Les variables retenues pour la modélisation ont été choisies en fonction de l
 | Credit History Length (Years)    | Durée de l’historique de crédit          | 0                  |
 | Interest Rate                    | Taux d’intérêt du prêt                   | 0                  |
 
-> ✅ Aucune valeur manquante n’a été observée dans les variables sélectionnées.
+>  Aucune valeur manquante n’a été observée dans les variables sélectionnées.
 
 ---
 
@@ -162,8 +162,29 @@ Les données ont été divisées en deux ensembles :
 >  La distribution est conservée après le split (stratification).
 
 ---
+# Résultat
+![Texte alternatif](images/confusion.png)
 
+---
+### 📈 Performances globales
 
+| Métrique   | Train | Test |
+|------------|-------|------|
+| Accuracy   | 0.7720 | 0.7693 |
+| Precision  | 0.4820 | 0.4783 |
+| Recall     | 0.7659 | 0.7687 |
+| F1-Score   | 0.5917 | 0.5897 |
+| ROC-AUC    | 0.8413 | 0.8387 |
+
+---
+## Interprétation
+- Le modèle présente une **bonne capacité de généralisation**, avec des performances très proches entre train et test donc pas d’overfitting notable  
+- Le **ROC-AUC élevé (~0.84)** indique une bonne capacité de discrimination entre défaut et non défaut  
+- Le **recall élevé (~77%) pour la classe Default** est un point fort ainsi le modèle détecte bien les emprunteurs à risque  
+- En revanche, la **precision faible (~48%)** indique un nombre important de faux positifs  
+- L’accuracy (~77%) est à interpréter avec prudence en raison du **déséquilibre des classes**
+
+---
 # Cloner le repo
 git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_Data_Science
 
