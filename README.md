@@ -13,10 +13,7 @@ Notre code est implémenté en **Python 3.8+** dans un **Jupyter Notebook**.
 
 ### Installation et Lancement
 
-**Étape 1 : Installer les dépendances**
-```python
-! pip install datasets plotly nbformat statsmodels seaborn matplotlib scipy numpy pandas scikit-learn -q
-```
+
 
 **Étape 2 : Exécuter les cellules**
 - Exécuter les cellules dans l'ordre de haut en bas (ordre séquentiel)
