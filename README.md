@@ -1,11 +1,168 @@
-#  Credit Risk Analysis & Loan Default Prediction
+#  Analyse du risque de crédit et prédiction des défauts de paiement
+
+
+
+##  Objectif de l'Étude
+
+L'objectif de cette étude consiste à **identifier et analyser les facteurs associés à une probabilité élevée de défaut de paiement d'un prêt**. Le projet vise à développer un modèle prédictif capable d'évaluer le risque de crédit afin d’aider à la prise de décision en matière d’octroi de crédit.
+
+**Enjeux:**
+- Réduire les pertes liées aux défauts de paiement
+- Identifier les emprunteurs à haut risque
+- Développer un système d'évaluation automatisé et transparent
+- Améliorer la gestion du portefeuille de crédit
 
 ---
-##  Objectif du projet
-L’objectif de cette étude est d’identifier et d’analyser les facteurs associés à une probabilité élevée de défaut de paiement d’un prêt.  
-Ce projet vise à construire un modèle prédictif afin d’aider à la prise de décision en matière d’octroi de crédit.
+##  Comment Lancer le Code ?
+
+Notre code est implémenté en **Python 3.8+** dans un **Jupyter Notebook**.
+
+### Installation et Lancement
+
+**Étape 1 : Installer les dépendances**
+```python
+! pip install datasets plotly nbformat statsmodels seaborn matplotlib scipy numpy pandas scikit-learn -q
+```
+
+**Étape 2 : Exécuter les cellules**
+- Exécuter les cellules dans l'ordre de haut en bas (ordre séquentiel)
+- Les données seront automatiquement chargées à partir de l'API HuggingFace
+- Le modèle s'entraînera et affichera les résultats progressivement
+
+## La Source de dnnées
+**Dataset:** `Uris001/credit-risk-eda` hébergé sur [HuggingFace Datasets](https://huggingface.co/datasets)
+
+### S'agissant de la fiabilité :
+C'est un Dataset public d'une plateforme reconnue, régulièrement entretenu par la communauté. La taille est suffisante avec plusieurs milliers d'observations pour modélisation robuste et les données sont synthétiques (anonymisées) (pas d'accès direct aux banques réelles).
 
 ---
+## La méthode de récupération des données
+
+### Deux approches posssibles
+
+**Méthode 1 : Via API REST (Huggingface Datasets Server)**
+```python
+url = "https://datasets-server.huggingface.co/rows"
+```
+
+**Méthode 2 : Via la bibliothèque HuggingFace**
+```python
+from datasets import load_dataset
+ds = load_dataset("Uris001/credit-risk-eda")
+data = ds["train"].to_pandas()
+```
+
+**Approche sélectionnée:** Méthode 2 (chargement direct via `load_dataset`)
+
+---
+
+##  Explication des variables
+
+### Variable cible 
+| Variable | Type | Description |
+|----------|------|-------------|
+| **Default Status** | Binaire (0/1) | 1 = Défaut de paiement, 0 = Remboursement normal |
+
+
+### Variables explicatives 
+
+#### Variables numériques 
+| Variable | Type | Description | Plage |
+|----------|------|-------------|-------|
+| **Annual Income** | Numérique | Revenu annuel de l'emprunteur | $4,000 - $2,000,000 |
+| **Loan Amount** | Numérique | Montant du prêt accordé | $1,000 - $35,000 |
+| **Interest Rate** | Numérique | Taux d'intérêt appliqué au prêt | 3% - 15% |
+| **Loan % of Income** (LTI) | Numérique | Ratio prêt/revenu (endettement) | 1% - 98% |
+| **Age** | Numérique | Âge de l'emprunteur | 18 - 84 ans |
+| **Employment Length** | Numérique | Années d'expérience professionnelle | 0 - 41 ans |
+| **Credit History Length** | Numérique | Longueur de l'historique de crédit | 0 - 80 ans |
+
+#### Variables catégorielles
+| Variable | Type | Description | Modalités |
+|----------|------|-------------|-----------|
+| **Loan Grade** | Catégorielle | Note de qualité du prêt | A, B, C, D, E, F, G |
+| **Loan Purpose** | Catégorielle | Motif du prêt | Education, Medical, Business, Personal, Auto, Home, Debt Consolidation |
+| **Home Ownership** | Catégorielle | Statut du logement | Rent, Mortgage, Own |
+| **Previous Default** | Binaire | Défaut antérieur | Yes, No |
+
+### Légendes
+- **Moyenne du Revenu:** ~$63,000
+- **Taux de Défaut Global:** 21.5% (défaut) vs 78.5% (remboursement)
+- **LTI Moyen:** ~28% (bon indicateur : < 43%)
+
+---
+
+##  Résumé des statistiques descriptives
+
+### Distribution de la Variable Cible
+- **Non-Défaut (0):** 78.5% 
+- **Défaut (1):** 21.5% 
+
+### Résumé par variable
+
+| Variable | Observation |
+|----------|-------------|
+| **Age** | entre 20 et 84 ans; les jeunes (18-25) ont taux défaut plus élevé (environ 23%) |
+| **Revenu** | Distribution asymétrique à droite; emprunteurs non-défaillants ont revenu médian d'environ $10 000 plus élevé |
+| **LTI** | Ratio moyen est de 28%; au-delà de 43% le risque défaut augmente significativement |
+| **Employment** | Expérience moyenne de 9 ans; stabilité inverse au risque |
+| **Loan Grade** | Grades A-C: taux défaut de 15%; Grades D-G: taux défaut de 60% ⚠️ |
+| **Home Ownership** | Propriétaires: taux défaut de 10%; Locataires: taux défaut de 28% |
+| **Previous Default** | Avoir un défaut antérieur **double le risque** (37% vs 18%) |
+
+### Conclusion Stats desc
+Les données montrent des schémas clairs: le défaut n'est pas aléatoire mais fortement lié à des variables observables (revenu, notation, historique)
+---
+
+##  Choix du modèle et des variables
+
+### Modèle sélectionné: Régression Logistique
+
+### Sélection des 8 variables finales
+
+**Critère de sélection :**
+Nous avons sélectionné les variables o=sous la base des analyses bivariées (corrélation avec défaut) et de ce qui avait déjà été proposé sur Hugging Face
+
+
+
+
+### Processus de Modélisation
+
+1. **Préparation des données (80/20 split):**
+   - 80% données d'entraînement 
+   - 20% données de test 
+   - Stratification maintenant la proportion défaut
+
+2. **Encodage des variables catégorielles:**
+   - `Previous Default`: {No → 0, Yes → 1}
+   - `Loan Grade`: {A → 1, B → 2, ..., G → 7}
+   - Autres variables cycliques via LabelEncoder
+
+3. **Normalisation (StandardScaler):**
+   
+
+4. **Entraînement avec pondération:**
+   - `class_weight='balanced'` pour compenser déséquilibre
+   - `max_iter=1000` pour convergence
+   - `random_state=42` pour reproductibilité
+
+### Performances du Modèle
+
+**Ensemble de Test:**
+| Métrique | Valeur |
+|----------|--------|
+| Accuracy | 80-82% |
+| Precision | 65-70% |
+| Recall | 70-75% |
+| F1-Score | 67-72% |
+| ROC-AUC | 0.72-0.75 |
+
+**Interprétation:** Parmi 100 emprunteurs défaillants, le modèle en identifie correctement  environ 70-75 (bonne sensibilité), mais identifie aussi 35% de faux positifs.
+
+Pour finir nous avons créé un score qui permet de discriminer la capacité d'un emprunteur à rembouser ou non son prêt.
+---
+
+
 
 ![Texte alternatif](images/image1.png)
 ## Trois tendances distinctes émergent :
