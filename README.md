@@ -75,7 +75,7 @@ C'est un Dataset public d'une plateforme reconnue, régulièrement entretenu par
 | Variable | Observation |
 |----------|-------------|
 | **Age** | entre 20 et 84 ans; les jeunes (18-25) ont taux défaut plus élevé (environ 23%) |
-| **Revenu** | Distribution asymétrique à droite; emprunteurs non-défaillants ont revenu médian d'environ $10 000 plus élevé |
+| **Revenu** | Distribution asymétrique à droite; emprunteurs non-défaillants ont revenu médian d'environ 10 000 euro plus élevé |
 | **LTI** | Ratio moyen est de 28%; au-delà de 43% le risque défaut augmente significativement |
 | **Employment** | Expérience moyenne de 9 ans; stabilité inverse au risque |
 | **Loan Grade** | Grades A-C: taux défaut de 15%; Grades D-G: taux défaut de 60%  |
