@@ -1,4 +1,4 @@
-#  Credit Risk Analysis & Loan Default Prediction
+#  Credit Risk Analysis 
 
 ---
 ##  Objectif du projet
@@ -95,7 +95,80 @@ Les prêts de type Debt Consolidation et Medical présentent les taux de défaut
 Les différences entre catégories sont modérées mais restent statistiquement exploitables pour la prédiction.
 Ainsi, le Loan Purpose a un pouvoir discriminant réel sur le risque de défaut.
 
+
 ---
+# Modélisation
+
+##  Données et Variables du Modèle
+
+###  Variables sélectionnées
+
+Les variables retenues pour la modélisation ont été choisies en fonction de leur pertinence économique et statistique dans l’explication du risque de défaut.
+
+| Variable                         | Description                              | Valeurs manquantes |
+|----------------------------------|------------------------------------------|--------------------|
+| Previous Default                 | Indique si l’emprunteur a déjà fait défaut | 0                  |
+| Loan Grade                       | Qualité du prêt (notation du risque)     | 0                  |
+| Loan % of Income                 | Ratio prêt / revenu                      | 0                  |
+| Annual Income                    | Revenu annuel de l’emprunteur            | 0                  |
+| Employment Length (Years)        | Ancienneté professionnelle (années)      | 0                  |
+| Age                              | Âge de l’emprunteur                      | 0                  |
+| Credit History Length (Years)    | Durée de l’historique de crédit          | 0                  |
+| Interest Rate                    | Taux d’intérêt du prêt                   | 0                  |
+
+> ✅ Aucune valeur manquante n’a été observée dans les variables sélectionnées.
+
+---
+
+###  Dimensions du dataset
+
+- Nombre total d’observations : **31 415**
+- Nombre de variables explicatives : **8**
+
+---
+
+###  Variable cible
+
+La variable cible est :
+
+- `Default Status`
+  - **0** : Non défaut  
+  - **1** : Défaut  
+
+#### Distribution globale
+
+| Classe | Nombre | Proportion |
+|--------|--------|------------|
+| 0 (Non défaut) | 24 641 | 78% |
+| 1 (Défaut)     | 6 774  | 22% |
+
+>  Le dataset est **déséquilibré**, avec une majorité de non-défauts.
+
+---
+
+###  Séparation des données
+
+Les données ont été divisées en deux ensembles :
+
+| Ensemble | Nombre d’observations | Proportion |
+|----------|----------------------|------------|
+| Train    | 21 990               | 70%        |
+| Test     | 9 425                | 30%        |
+
+---
+
+###  Distribution dans l’échantillon d’entraînement
+
+| Classe | Proportion |
+|--------|------------|
+| 0 (Non défaut) | 0.78 |
+| 1 (Défaut)     | 0.22 |
+
+>  La distribution est conservée après le split (stratification).
+
+---
+
+
 # Cloner le repo
 git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_Data_Science
 
