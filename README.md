@@ -7,18 +7,6 @@ L'objectif de cette étude consiste à **identifier et analyser les facteurs ass
 
 ---
 
-##  Comment lancer le code ?
-
-Notre code est implémenté en **Python 3.8+** dans un **Jupyter Notebook**.
-
-### Installation et Lancement
-
-
-
-**Étape 2 : Exécuter les cellules**
-- Exécuter les cellules dans l'ordre de haut en bas (ordre séquentiel)
-- Les données seront automatiquement chargées à partir de l'API HuggingFace
-- Le modèle s'entraînera et affichera les résultats progressivement
 
 ## La Source de données
 **Dataset:** `Uris001/credit-risk-eda` hébergé sur [HuggingFace Datasets](https://huggingface.co/datasets)
@@ -36,12 +24,8 @@ C'est un Dataset public d'une plateforme reconnue, régulièrement entretenu par
 url = "https://datasets-server.huggingface.co/rows"
 ```
 
-**Méthode 2 : Via la bibliothèque HuggingFace**
-```python
-from datasets import load_dataset
-ds = load_dataset("Uris001/credit-risk-eda")
-data = ds["train"].to_pandas()
-```
+**Méthode 2 : Via la bibliothèque HuggingFace (dataset)**
+
 
 **Approche sélectionnée:** Méthode 2 (chargement direct via `load_dataset`)
 
