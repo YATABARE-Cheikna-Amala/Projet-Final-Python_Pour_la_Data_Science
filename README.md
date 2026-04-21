@@ -193,6 +193,6 @@ git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_
 cd `Projet-Final-Python_Pour_la_Data_Science`
 
 # Lancer le notebook
-jupyter notebook (Run All)
+`Projet_python_pour_la_data_science.ipynb (Run All)`
 
 ---
