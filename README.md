@@ -82,43 +82,11 @@ C'est un Dataset public d'une plateforme reconnue, régulièrement entretenu par
 | **Home Ownership** | Propriétaires: taux défaut de 10%; Locataires: taux défaut de 28% |
 | **Previous Default** | Avoir un défaut antérieur **double le risque** (37% vs 18%) |
 
-### Conclusion Stats desc
-Les données montrent des schémas clairs: le défaut n'est pas aléatoire mais fortement lié à des variables observables (revenu, notation, historique)
+### Conclusion statistique descriptive
+Les données montrent des schémas clairs: le défaut de crédit n'est pas aléatoire mais fortement lié à des variables observables (revenu, notation, historique)
 ---
 
-##  Choix du modèle et des variables
 
-### Modèle sélectionné: Régression Logistique
-
-### Sélection des 8 variables finales
-
-**Critère de sélection :**
-Nous avons sélectionné les variables o=sous la base des analyses bivariées (corrélation avec défaut) et de ce qui avait déjà été proposé sur Hugging Face
-
-
-
-
-### Processus de Modélisation
-
-1. **Préparation des données (80/20 split):**
-   - 80% données d'entraînement 
-   - 20% données de test 
-   - Stratification maintenant la proportion défaut
-
-2. **Encodage des variables catégorielles:**
-   - `Previous Default`: {No → 0, Yes → 1}
-   - `Loan Grade`: {A → 1, B → 2, ..., G → 7}
-   - Autres variables cycliques via LabelEncoder
-
-3. **Normalisation (StandardScaler):**
-   
-
-4. **Entraînement avec pondération:**
-   - `class_weight='balanced'` pour compenser déséquilibre
-   - `max_iter=1000` pour convergence
-   - `random_state=42` pour reproductibilité
-
----
 ![Texte alternatif](images/image1.png)
 ## Trois tendances distinctes émergent :
 
@@ -206,6 +174,31 @@ Ainsi, le Loan Purpose a un pouvoir discriminant réel sur le risque de défaut.
 ---
 # Modélisation
 
+### Modèle sélectionné: Régression Logistique
+
+
+### Processus de Modélisation
+
+1. **Préparation des données (80/20 split):**
+   - 80% données d'entraînement 
+   - 20% données de test 
+   - Stratification maintenant la proportion défaut
+
+2. **Encodage des variables catégorielles:**
+   - `Previous Default`: {No → 0, Yes → 1}
+   - `Loan Grade`: {A → 1, B → 2, ..., G → 7}
+   - Autres variables cycliques via LabelEncoder
+
+3. **Normalisation (StandardScaler):**
+   
+
+4. **Entraînement avec pondération:**
+   - `class_weight='balanced'` pour compenser déséquilibre
+   - `max_iter=1000` pour convergence
+   - `random_state=42` pour reproductibilité
+
+---
+
 ##  Données et Variables du Modèle
 
 ###  Variables sélectionnées
@@ -279,7 +272,7 @@ Les données ont été divisées en deux ensembles :
 ---
 ![Texte alternatif](images/Roc.png)
 ---
-### 📈 Performances globales
+###  Performances globales
 
 | Métrique   | Train | Test |
 |------------|-------|------|
