@@ -291,6 +291,8 @@ Les données ont été divisées en deux ensembles :
 - L’accuracy (77%) est à interpréter avec prudence en raison du **déséquilibre des classes**
 
 ---
+# initialiser un repo
+git init
 # Cloner le repo
 git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_Data_Science
 
