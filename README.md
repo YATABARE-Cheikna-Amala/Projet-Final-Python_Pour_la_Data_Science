@@ -6,7 +6,7 @@ L’objectif de cette étude est d’identifier et d’analyser les facteurs ass
 Ce projet vise à construire un modèle prédictif afin d’aider à la prise de décision en matière d’octroi de crédit.
 
 ---
-
+##  Contribution du défaut antérieur selon les variables explicatives
 ![Texte alternatif](images/image1.png)
 ## Trois tendances distinctes émergent :
 
