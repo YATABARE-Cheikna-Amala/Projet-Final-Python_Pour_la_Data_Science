@@ -164,7 +164,8 @@ Les données ont été divisées en deux ensembles :
 ---
 # Résultat
 ![Texte alternatif](images/Confusion.png)
-
+---
+![Texte alternatif](images/Roc.png)
 ---
 ### 📈 Performances globales
 
