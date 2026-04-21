@@ -41,8 +41,8 @@ C'est un Dataset public d'une plateforme reconnue, régulièrement entretenu par
 #### Variables numériques 
 | Variable | Type | Description | Plage |
 |----------|------|-------------|-------|
-| **Annual Income** | Numérique | Revenu annuel de l'emprunteur | $4,000 - $2,000,000 |
-| **Loan Amount** | Numérique | Montant du prêt accordé | $1,000 - $35,000 |
+| **Annual Income** | Numérique | Revenu annuel de l'emprunteur | 4,000 - 2,000,000 euro |
+| **Loan Amount** | Numérique | Montant du prêt accordé | 1,000 - 35,000 euro |
 | **Interest Rate** | Numérique | Taux d'intérêt appliqué au prêt | 3% - 15% |
 | **Loan % of Income** (LTI) | Numérique | Ratio prêt/revenu (endettement) | 1% - 98% |
 | **Age** | Numérique | Âge de l'emprunteur | 18 - 84 ans |
