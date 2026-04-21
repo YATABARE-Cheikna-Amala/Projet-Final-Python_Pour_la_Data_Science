@@ -1,19 +1,13 @@
 #  Analyse du risque de crédit et prédiction des défauts de paiement
 
 
-
-##  Objectif de l'Étude
-
-L'objectif de cette étude consiste à **identifier et analyser les facteurs associés à une probabilité élevée de défaut de paiement d'un prêt**. Le projet vise à développer un modèle prédictif capable d'évaluer le risque de crédit afin d’aider à la prise de décision en matière d’octroi de crédit.
-
-**Enjeux:**
-- Réduire les pertes liées aux défauts de paiement
-- Identifier les emprunteurs à haut risque
-- Développer un système d'évaluation automatisé et transparent
-- Améliorer la gestion du portefeuille de crédit
+---
+##  Objectif du projet
+L'objectif de cette étude consiste à **identifier et analyser les facteurs associés à une probabilité élevée de défaut de paiement d'un prêt**. Le projet vise à développer un modèle prédictif capable d'évaluer le risque de crédit afin d’aider à la prise de décision en matière d’octroi de crédi.
 
 ---
-##  Comment Lancer le Code ?
+
+##  Comment lancer le code ?
 
 Notre code est implémenté en **Python 3.8+** dans un **Jupyter Notebook**.
 
@@ -29,7 +23,7 @@ Notre code est implémenté en **Python 3.8+** dans un **Jupyter Notebook**.
 - Les données seront automatiquement chargées à partir de l'API HuggingFace
 - Le modèle s'entraînera et affichera les résultats progressivement
 
-## La Source de dnnées
+## La Source de données
 **Dataset:** `Uris001/credit-risk-eda` hébergé sur [HuggingFace Datasets](https://huggingface.co/datasets)
 
 ### S'agissant de la fiabilité :
@@ -86,9 +80,9 @@ data = ds["train"].to_pandas()
 | **Previous Default** | Binaire | Défaut antérieur | Yes, No |
 
 ### Légendes
-- **Moyenne du Revenu:** ~$63,000
+- **Moyenne du Revenu:** $63,000
 - **Taux de Défaut Global:** 21.5% (défaut) vs 78.5% (remboursement)
-- **LTI Moyen:** ~28% (bon indicateur : < 43%)
+- **LTI Moyen:** 28% (bon indicateur : < 43%)
 
 ---
 
@@ -106,7 +100,7 @@ data = ds["train"].to_pandas()
 | **Revenu** | Distribution asymétrique à droite; emprunteurs non-défaillants ont revenu médian d'environ $10 000 plus élevé |
 | **LTI** | Ratio moyen est de 28%; au-delà de 43% le risque défaut augmente significativement |
 | **Employment** | Expérience moyenne de 9 ans; stabilité inverse au risque |
-| **Loan Grade** | Grades A-C: taux défaut de 15%; Grades D-G: taux défaut de 60% ⚠️ |
+| **Loan Grade** | Grades A-C: taux défaut de 15%; Grades D-G: taux défaut de 60%  |
 | **Home Ownership** | Propriétaires: taux défaut de 10%; Locataires: taux défaut de 28% |
 | **Previous Default** | Avoir un défaut antérieur **double le risque** (37% vs 18%) |
 
@@ -146,24 +140,7 @@ Nous avons sélectionné les variables o=sous la base des analyses bivariées (c
    - `max_iter=1000` pour convergence
    - `random_state=42` pour reproductibilité
 
-### Performances du Modèle
-
-**Ensemble de Test:**
-| Métrique | Valeur |
-|----------|--------|
-| Accuracy | 80-82% |
-| Precision | 65-70% |
-| Recall | 70-75% |
-| F1-Score | 67-72% |
-| ROC-AUC | 0.72-0.75 |
-
-**Interprétation:** Parmi 100 emprunteurs défaillants, le modèle en identifie correctement  environ 70-75 (bonne sensibilité), mais identifie aussi 35% de faux positifs.
-
-Pour finir nous avons créé un score qui permet de discriminer la capacité d'un emprunteur à rembouser ou non son prêt.
 ---
-
-
-
 ![Texte alternatif](images/image1.png)
 ## Trois tendances distinctes émergent :
 
@@ -183,11 +160,6 @@ Le défaut antérieur agit comme un signal comportemental indépendant par rappo
 
 Sa contribution marginale dans un modèle incluant le grade doit donc être validée : sa valeur ajoutée pourrait être limitée aux segments qui ne sont pas suffisamment discriminés par le grade seul.
 
----
-
-## Implication
-Le défaut antérieur constitue un signal comportemental indépendant du revenu et du LTI, mais il est largement déjà intégré dans la variable *grade de crédit*.  
-Sa contribution marginale dans un modèle incluant le grade doit donc être vérifiée : sa valeur ajoutée pourrait être limitée aux segments mal différenciés par le grade seul.
 
 ---
 
@@ -252,14 +224,109 @@ Les prêts de type Debt Consolidation et Medical présentent les taux de défaut
 Les différences entre catégories sont modérées mais restent statistiquement exploitables pour la prédiction.
 Ainsi, le Loan Purpose a un pouvoir discriminant réel sur le risque de défaut.
 
+
+---
+# Modélisation
+
+##  Données et Variables du Modèle
+
+###  Variables sélectionnées
+
+Les variables retenues pour la modélisation ont été choisies en fonction de leur pertinence économique et statistique dans l’explication du risque de défaut.
+
+| Variable                         | Description                              | Valeurs manquantes |
+|----------------------------------|------------------------------------------|--------------------|
+| Previous Default                 | Indique si l’emprunteur a déjà fait défaut | 0                  |
+| Loan Grade                       | Qualité du prêt (notation du risque)     | 0                  |
+| Loan % of Income                 | Ratio prêt / revenu                      | 0                  |
+| Annual Income                    | Revenu annuel de l’emprunteur            | 0                  |
+| Employment Length (Years)        | Ancienneté professionnelle (années)      | 0                  |
+| Age                              | Âge de l’emprunteur                      | 0                  |
+| Credit History Length (Years)    | Durée de l’historique de crédit          | 0                  |
+| Interest Rate                    | Taux d’intérêt du prêt                   | 0                  |
+
+>  Aucune valeur manquante n’a été observée dans les variables sélectionnées.
+
+---
+
+###  Dimensions du dataset
+
+- Nombre total d’observations : **31 415**
+- Nombre de variables explicatives : **8**
+
+---
+
+###  Variable cible
+
+La variable cible est :
+
+- `Default Status`
+  - **0** : Non défaut  
+  - **1** : Défaut  
+
+#### Distribution globale
+
+| Classe | Nombre | Proportion |
+|--------|--------|------------|
+| 0 (Non défaut) | 24 641 | 78% |
+| 1 (Défaut)     | 6 774  | 22% |
+
+>  Le dataset est **déséquilibré**, avec une majorité de non-défauts.
+
+---
+
+###  Séparation des données
+
+Les données ont été divisées en deux ensembles :
+
+| Ensemble | Nombre d’observations | Proportion |
+|----------|----------------------|------------|
+| Train    | 21 990               | 70%        |
+| Test     | 9 425                | 30%        |
+
+---
+
+###  Distribution dans l’échantillon d’entraînement
+
+| Classe | Proportion |
+|--------|------------|
+| 0 (Non défaut) | 0.78 |
+| 1 (Défaut)     | 0.22 |
+
+>  La distribution est conservée après le split (stratification).
+
+---
+# Résultat
+![Texte alternatif](images/Confusion.png)
+---
+![Texte alternatif](images/Roc.png)
+---
+### 📈 Performances globales
+
+| Métrique   | Train | Test |
+|------------|-------|------|
+| Accuracy   | 0.7720 | 0.7693 |
+| Precision  | 0.4820 | 0.4783 |
+| Recall     | 0.7659 | 0.7687 |
+| F1-Score   | 0.5917 | 0.5897 |
+| ROC-AUC    | 0.8413 | 0.8387 |
+
+---
+## Interprétation
+- Le modèle présente une **bonne capacité de généralisation**, avec des performances très proches entre train et test donc pas d’overfitting notable  
+- Le **ROC-AUC élevé (0.84)** indique une bonne capacité de discrimination entre défaut et non défaut  
+- Le **recall élevé (77%) pour la classe Default** est un point fort ainsi le modèle détecte bien les emprunteurs à risque  
+- En revanche, la **precision faible (48%)** indique un nombre important de faux positifs  
+- L’accuracy (77%) est à interpréter avec prudence en raison du **déséquilibre des classes**
+
 ---
 # Cloner le repo
 git clone https://github.com/YATABARE-Cheikna-Amala/Projet-Final-Python_Pour_la_Data_Science
 
 # Aller dans le dossier
-cd Projet-Final-Python_Pour_la_Data_Science
+cd `Projet-Final-Python_Pour_la_Data_Science`
 
 # Lancer le notebook
-jupyter notebook (Run All)
+`Projet_python_pour_la_data_science.ipynb (Run All)`
 
 ---
