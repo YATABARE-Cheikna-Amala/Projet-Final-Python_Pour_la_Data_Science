@@ -19,13 +19,10 @@ C'est un Dataset public d'une plateforme reconnue, régulièrement entretenu par
 
 ### Deux approches posssibles
 
-**Méthode 1 : Via API REST (Huggingface Datasets Server)**
-```python
-url = "https://datasets-server.huggingface.co/rows"
-```
-
-**Méthode 2 : Via la bibliothèque HuggingFace (dataset)**
-
+**Méthode 1 : **API REST (Hugging Face Datasets Server)**  
+  
+**Méthode 2 : **Bibliothèque Hugging Face (`datasets`)**  
+  Permet un chargement direct des données (simple et rapide).
 
 **Approche sélectionnée:** Méthode 2 (chargement direct via `load_dataset`)
 
