@@ -26,11 +26,6 @@ Le défaut antérieur agit comme un signal comportemental indépendant par rappo
 
 Sa contribution marginale dans un modèle incluant le grade doit donc être validée : sa valeur ajoutée pourrait être limitée aux segments qui ne sont pas suffisamment discriminés par le grade seul.
 
----
-
-## Implication
-Le défaut antérieur constitue un signal comportemental indépendant du revenu et du LTI, mais il est largement déjà intégré dans la variable *grade de crédit*.  
-Sa contribution marginale dans un modèle incluant le grade doit donc être vérifiée : sa valeur ajoutée pourrait être limitée aux segments mal différenciés par le grade seul.
 
 ---
 
